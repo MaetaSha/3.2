@@ -1,0 +1,657 @@
+problem1.
+import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+public class Image extends JFrame {
+private ImageIcon image1;
+private JLabel label1;
+private ImageIcon image2;
+private JLabel label2;
+Image(){
+setLayout(new FlowLayout());
+image1 = new ImageIcon(getClass().getResource("ice.jpeg"));
+label1 = new JLabel(image1);
+add(label1);
+image2 = new ImageIcon(getClass().getResource("pust_logo.png"));
+label2 = new JLabel(image2);
+add(label2);
+}
+public static void main(String args[]) {
+Image gui = new Image();
+gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+gui.setVisible(true);
+gui.pack();
+gui.setTitle("Image Program");
+}
+}
+
+
+
+problem2
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
+public class bill extends JFrame implements ActionListener {
+    JCheckBox cb1, cb2, cb3;
+    JLabel label;
+    JTextField quantityField1, quantityField2, quantityField3;
+
+    public bill() {
+        setSize(400, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(null);
+        label = new JLabel("<html><font color=\"#000000\">Food Ordering System</font></html>");
+        label.setBounds(50, 50, 300, 20);
+        cb1 = new JCheckBox("Pizza @100");
+        cb1.setBounds(100, 100, 150, 20);
+        cb2 = new JCheckBox("Burger @30");
+        cb2.setBounds(100, 150, 150, 20);
+        cb3 = new JCheckBox("Tea @10");
+        cb3.setBounds(100, 200, 150, 20);
+        quantityField1 = new JTextField();
+        quantityField1.setBounds(260, 100, 50, 20);
+        quantityField2 = new JTextField();
+        quantityField2.setBounds(260, 150, 50, 20);
+        quantityField3 = new JTextField();
+        quantityField3.setBounds(260, 200, 50, 20);
+        JButton btn = new JButton("Order");
+        btn.setBounds(100, 250, 150, 20);
+        btn.addActionListener(this);
+        add(cb1);
+        add(cb2);
+        add(cb3);
+        add(quantityField1);
+        add(quantityField2);
+        add(quantityField3);
+        add(btn);
+        add(label);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        double amount = 0;
+        if (cb1.isSelected()) {
+            int quantity1 = Integer.parseInt(quantityField1.getText());
+            amount += 100 * quantity1;
+        }
+        if (cb2.isSelected()) {
+            int quantity2 = Integer.parseInt(quantityField2.getText());
+            amount += 30 * quantity2;
+        }
+        if (cb3.isSelected()) {
+            int quantity3 = Integer.parseInt(quantityField3.getText());
+            amount += 10 * quantity3;
+        }
+
+        // Create a custom panel with the same background color as the frame
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.white);
+
+        // Add the message to the panel
+        JLabel messageLabel = new JLabel("Total: " + amount);
+        panel.add(messageLabel);
+
+        // Show the message dialog with the custom panel
+        JOptionPane.showMessageDialog(this, panel, "Bill", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new bill());
+    }
+}
+
+
+problem3
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Form implements ActionListener {
+    private static JLabel success;
+    private static JFrame frame;
+    private static JLabel label1, label2, label3;
+    private static JPanel panel;
+    private static JButton button;
+    private static JTextField userText1, userText2, userText3;
+
+    public static void main(String[] args) {
+
+        frame = new JFrame();
+        panel = new JPanel();
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+        panel.setLayout(null);
+        // Setting all Three Lebels
+        label1 = new JLabel("Name");
+        label1.setBounds(10, 10, 80, 25);
+        panel.add(label1);
+        label2 = new JLabel("Roll");
+        label2.setBounds(10, 60, 80, 25);
+        panel.add(label2);
+        label3 = new JLabel("Department");
+        label3.setBounds(10, 110, 80, 25);
+        panel.add(label3);
+        // Creating all Textfields
+        userText1 = new JTextField("Enter Your Name");
+        userText1.setBounds(100, 10, 200, 25);
+        panel.add(userText1);
+        JTextField userText2 = new JTextField("Enter Your Roll");
+        userText2.setBounds(100, 60, 200, 25);
+        panel.add(userText2);
+        JTextField userText3 = new JTextField("Enter Your Department");
+        userText3.setBounds(100, 110, 200, 25);
+        panel.add(userText3);
+        button = new JButton("Save");
+        button.setBounds(150, 160, 80, 25);
+        button.addActionListener(new Form()); // not use this keyword,
+        // because it called from main method, if we use constructor then we can use
+        // this keyword
+        panel.add(button);
+        success = new JLabel("Not Submit Yet");
+        success.setBounds(130, 210, 300, 25);
+        panel.add(success);
+        frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        success.setText("Saved Successfully");
+    }
+}
+
+
+problem4
+
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class calculator extends JFrame implements ActionListener {
+    JButton b10, b11, b12, b13, b14, b15, b16;
+    JButton b[] = new JButton[10];
+    int i;
+    double n1, n2, r;
+    JTextField res;
+    StringBuilder expression = new StringBuilder();
+    char op;
+
+    public calculator() {
+        super("Calculator");
+        setLayout(new BorderLayout());
+
+        // Panel for buttons
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(5, 4));
+
+        // Add number buttons
+        for (int i = 0; i <= 9; i++) {
+            b[i] = new JButton(i + "");
+            buttonPanel.add(b[i]);
+            b[i].addActionListener(this);
+        }
+
+        // Add operation buttons
+        b10 = new JButton("+");
+        buttonPanel.add(b10);
+        b10.addActionListener(this);
+        b11 = new JButton("-");
+        buttonPanel.add(b11);
+        b11.addActionListener(this);
+        b12 = new JButton("*");
+        buttonPanel.add(b12);
+        b12.addActionListener(this);
+        b13 = new JButton("/");
+        buttonPanel.add(b13);
+        b13.addActionListener(this);
+        b14 = new JButton("=");
+        buttonPanel.add(b14);
+        b14.addActionListener(this);
+        b15 = new JButton("C");
+        buttonPanel.add(b15);
+        b15.addActionListener(this);
+        b16 = new JButton(".");
+        buttonPanel.add(b16);
+        b16.addActionListener(this);
+
+        add(buttonPanel, BorderLayout.CENTER);
+
+        // Output text field
+        res = new JTextField(20); // Increase the number of columns
+        res.setFont(new Font("Arial", Font.PLAIN, 20)); // Decreased font size
+        res.setEditable(false); // Make it non-editable
+        add(res, BorderLayout.SOUTH); // Move result display to the bottom
+
+        setVisible(true);
+        setSize(400, 450); // Increase window height
+    }
+
+    public void actionPerformed(ActionEvent ae) {
+        JButton pb = (JButton) ae.getSource();
+        if (pb == b15) {
+            expression.setLength(0);
+            res.setText("");
+        } else if (pb == b14) {
+            evaluate();
+        } else if (pb == b16) {
+            String currentText = res.getText();
+            if (!currentText.contains(".")) {
+                expression.append(".");
+                res.setText(expression.toString());
+            }
+        } else {
+            boolean opf = false;
+            if (pb == b10) {
+                op = '+';
+                opf = true;
+            }
+            if (pb == b11) {
+                op = '-';
+                opf = true;
+            }
+            if (pb == b12) {
+                op = '*';
+                opf = true;
+            }
+            if (pb == b13) {
+                op = '/';
+                opf = true;
+            }
+            if (opf == false) {
+                for (i = 0; i < 10; i++) {
+                    if (pb == b[i]) {
+                        expression.append(i);
+                        res.setText(expression.toString());
+                    }
+                }
+            } else {
+                expression.append(" " + pb.getText() + " ");
+                res.setText(expression.toString());
+            }
+        }
+    }
+
+    void evaluate() {
+        String[] parts = expression.toString().split("\\s+");
+        if (parts.length != 3) {
+            res.setText("Invalid expression");
+            expression.setLength(0);
+            return;
+        }
+        try {
+            n1 = Double.parseDouble(parts[0]);
+            op = parts[1].charAt(0);
+            n2 = Double.parseDouble(parts[2]);
+            switch (op) {
+                case '+':
+                    r = n1 + n2;
+                    break;
+                case '-':
+                    r = n1 - n2;
+                    break;
+                case '*':
+                    r = n1 * n2;
+                    break;
+                case '/':
+                    if (n2 != 0) {
+                        r = n1 / n2;
+                    } else {
+                        res.setText("Error: Division by zero");
+                        expression.setLength(0);
+                        return;
+                    }
+                    break;
+                default:
+                    res.setText("Invalid operator");
+                    expression.setLength(0);
+                    return;
+            }
+            res.setText(Double.toString(r));
+        } catch (NumberFormatException e) {
+            res.setText("Invalid number format");
+        }
+        expression.setLength(0);
+    }
+
+    public static void main(String arg[]) {
+        new calculator();
+    }
+}
+
+
+problem5
+
+class A extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("\t From Thread A : i = " + i);
+        }
+        System.out.println("Exit from A");
+    }
+}
+ 
+class B extends Thread {
+    public void run() {
+        for (int j = 1; j <= 5; j++) {
+            System.out.println("\t From Thread B : j = " + j);
+        }
+        System.out.println("Exit from B");
+    }
+}
+ 
+class C extends Thread {
+    public void run() {
+        for (int k = 1; k <= 5; k++) {
+            System.out.println("\t From Thread C : k = " + k);
+        }
+        System.out.println("Exit from C");
+    }
+}
+ 
+public class ThreadTest {
+    public static void main(String args[]) {
+        new A().start();
+        new B().start();
+        new C().start();
+    }
+}
+
+
+problem6
+class MyThread extends Thread {
+    private String threadName;
+
+    public MyThread(String name) {
+        this.threadName = name;
+    }
+
+    public void run() {
+        System.out.println("Thread " + threadName + " is running.");
+    }
+}
+
+public class ThreadsWithRunMethod {
+    public static void main(String[] args) {
+        MyThread thread1 = new MyThread("Thread 1");
+        MyThread thread2 = new MyThread("Thread 2");
+        MyThread thread3 = new MyThread("Thread 3");
+
+        // Calling run() method directly
+        thread1.run();
+        thread2.run();
+        thread3.run();
+    }
+}
+
+
+problem7
+
+class A extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("\t From Thread A : i= " + i);
+            if (i == 1)
+                Thread.yield(); // Yield the CPU to other threads
+        }
+        System.out.println("Exit from A");
+    }
+}
+
+class C extends Thread {
+    public void run() {
+        for (int k = 1; k <= 5; k++) {
+            System.out.println("\t From Thread C : k= " + k);
+            if (k == 1) {
+                try {
+                    Thread.sleep(1000); // Pause for 1 second
+                } catch (InterruptedException e) {
+                    System.out.println("Thread C interrupted.");
+                }
+            }
+        }
+        System.out.println("Exit from C");
+    }
+}
+
+public class ThreadMethodd {
+    public static void main(String[] args) {
+        A threadA = new A();
+
+        C threadC = new C();
+
+        System.out.println("Start thread A");
+        threadA.start();
+
+        System.out.println("Start thread C");
+        threadC.start();
+
+        // Main thread continues its execution
+        System.out.println("End of the main thread");
+    }
+}
+  
+
+problem 7 sajeeb( ekhane 3 ta class use kora in detail)
+
+public class ThreadProgram3_SKR {
+    public static void main(String[] args) {
+        A threadA = new A();
+        B threadB = new B();
+        C threadC = new C();
+
+        // Start all threads
+        threadA.start();
+        threadB.start();
+        threadC.start();
+
+        // Demonstrate yield()
+        System.out.println("Main thread executing...");
+        Thread.yield();
+        System.out.println("Main thread resumed...");
+
+        // Demonstrate sleep()
+        try {
+            System.out.println("Main thread sleeping for 2 seconds...");
+            Thread.sleep(2000);
+            System.out.println("Main thread woke up after sleeping.");
+            for (int j = 1; j <= 5; j++) {
+                System.out.println("From Main Thread: j = " + j);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Main thread interrupted while sleeping.");
+        }
+    }
+}
+
+
+class A extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("From Thread A: i = " + i);
+        }
+        System.out.println("Exit from A");
+    }
+}
+
+class B extends Thread {
+    public void run() {
+        for (int j = 1; j <= 5; j++) {
+            System.out.println("From Thread B: j = " + j);
+        }
+        System.out.println("Exit from B");
+    }
+}
+
+class C extends Thread {
+    public void run() {
+        for (int k = 1; k <= 5; k++) {
+            System.out.println("From Thread C: k = " + k);
+        }
+        System.out.println("Exit from C");
+    }
+}
+
+problem8
+
+public class ThreadPriorityyy {
+    public static void main(String args[]) {
+
+        A threadA = new A();
+        B threadB = new B();
+        C threadC = new C();
+
+        // Setting thread priorities
+        threadC.setPriority(Thread.MAX_PRIORITY);
+        threadB.setPriority(threadA.getPriority() + 1);
+        threadA.setPriority(Thread.MIN_PRIORITY);
+
+        System.out.println("Start thread A");
+        threadA.start();
+
+        System.out.println("Start thread B");
+        threadB.start();
+
+        System.out.println("Start thread C");
+        threadC.start();
+
+        // Wait for threads to finish execution
+        try {
+            threadA.join();
+            threadB.join();
+            threadC.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("End of main thread");
+    }
+
+    static class A extends Thread {
+        public void run() {
+            synchronized (System.out) {
+                System.out.println("Thread A started");
+                for (int i = 1; i <= 4; i++) {
+                    System.out.println("\tFrom Thread A : i =" + i);
+                }
+                System.out.println("Exit from A ");
+            }
+        }
+    }
+
+    static class B extends Thread {
+        public void run() {
+            synchronized (System.out) {
+                System.out.println("Thread B started");
+                for (int j = 1; j <= 4; j++) {
+                    System.out.println("\tFrom Thread B : j =" + j);
+                }
+                System.out.println("Exit from B ");
+            }
+        }
+    }
+
+    static class C extends Thread {
+        public void run() {
+            synchronized (System.out) {
+                System.out.println("Thread C started");
+                for (int k = 1; k <= 4; k++) {
+                    System.out.println("\tFrom Thread C : k=" + k);
+                }
+                System.out.println("Exit from C");
+            }
+        }
+    }
+}
+
+
+problem9
+client model
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class ClientModel {
+
+    public static void main(String[] args) {
+        
+        try {
+            
+            Socket soc= new Socket("localhost",4999);
+            String str="hello guys";
+            PrintWriter output=new PrintWriter(soc.getOutputStream());
+            output.println(str);
+            output.flush();
+            
+            BufferedReader in= new BufferedReader(new InputStreamReader(soc.getInputStream()));
+            String strinput=in.readLine();
+            System.out.println("Server Sent :"+strinput);
+            
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+}
+
+server model
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class ServerModel {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        
+        try {
+            System.out.println("Waiting for the clients...");
+            ServerSocket ss= new ServerSocket(4999);
+            Socket soc= ss.accept();
+            System.out.println("Client Connected...");
+            BufferedReader in= new BufferedReader(new InputStreamReader(soc.getInputStream()));
+            String str=in.readLine();
+            System.out.println("Client Sent :"+str);
+            
+            PrintWriter out= new PrintWriter(soc.getOutputStream(),true);
+            out.println("I got your msg");
+            out.flush();
+            
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        
+    }
+
+}
+
